@@ -5,7 +5,7 @@ from envs.media_env import MediaEnv
 import os
 
 
-def train(out_dir='models', total_timesteps=10000, render=False):
+def train(out_dir='models', total_timesteps=100000, render=False):
     os.makedirs(out_dir, exist_ok=True)
     env = MediaEnv()
     model = PPO('MlpPolicy', env, verbose=1, tensorboard_log="./tb_logs/")
