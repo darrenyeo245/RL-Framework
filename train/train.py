@@ -1,47 +1,36 @@
-import matplotlib.pyplot as plt
-from stable_baselines3 import PPO
-from stable_baselines3.common.callbacks import CheckpointCallback
-from envs.media_env import MediaEnv
-import os
+import sys
+from pathlib import Path
 
+# Ensure local packages (`env`, `osc`) are resolved before site-packages modules.
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
-def train(out_dir='models', total_timesteps=100000, render=False):
-    os.makedirs(out_dir, exist_ok=True)
-    env = MediaEnv()
-    model = PPO('MlpPolicy', env, verbose=1, tensorboard_log="./tb_logs/")
-    checkpoint_callback = CheckpointCallback(save_freq=20000, save_path=out_dir, name_prefix='rl_model')
+import numpy as np
+from env import MediaEnv
+from osc.osc_interface import OSCInterface
 
-    model.learn(total_timesteps=total_timesteps, callback=checkpoint_callback)
-    model.save(os.path.join(out_dir, 'final_model'))
-    print("Training completed and model saved.")
+osc = OSCInterface()
+env = MediaEnv(osc)
 
-    # Visualize after training
-    if render:
-        visualize_trained_model(model, env)
+state, info = env.reset()
+step_idx = 0
 
-    return model, env
+print("Training gestartet. Jeder Schritt wartet auf ein Reward-Signal (/reward).")
 
+while True:
+    action = np.random.uniform(-1, 1, 3)
 
-def visualize_trained_model(model, env, num_episodes=3):
-    """Visualize the trained agent"""
-    for episode in range(num_episodes):
-        obs, info = env.reset()
-        done = False
-        total_reward = 0
+    print(f"\n--- Step {step_idx} ---")
+    print("Input action:", np.array2string(action, precision=3))
+    print("Warte auf Reward (+ oder - in reward_input.py)...")
 
-        while not done:
-            env.render()
-            action, _states = model.predict(obs, deterministic=True)
-            obs, reward, terminated, truncated, info = env.step(action)
-            total_reward += reward
-            done = terminated or truncated
+    state, reward, terminated, truncated, info = env.step(action)
 
-        print(f"Episode {episode + 1}: Total Reward = {total_reward:.2f}")
+    print("Output state:", np.array2string(np.asarray(state), precision=3))
+    print("Output reward:", reward)
 
-    plt.ioff()
-    plt.show()
-    env.close()
+    step_idx += 1
 
-
-if __name__ == "__main__":
-    train(out_dir='models', total_timesteps=10000, render=True)
+    if terminated or truncated:
+        state, info = env.reset()
