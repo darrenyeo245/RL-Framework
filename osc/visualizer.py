@@ -192,7 +192,7 @@ def build_scene():
 
     # Legende (2D, direkt auf Canvas)
     visuals.Text(
-        "Actor",
+        "Akteur",
         color=(0.2, 0.6, 1.0, 1.0),
         font_size=10,
         pos=(10, 20),
@@ -206,7 +206,7 @@ def build_scene():
         parent=canvas.scene,
     )
     visuals.Text(
-        "Aim-Point (XY-Ebene)",
+        "Ausrichtung (XY-Ebene)",
         color=(1.0, 0.25, 0.25, 1.0),
         font_size=10,
         pos=(10, 60),
