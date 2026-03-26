@@ -4,6 +4,8 @@ from pythonosc import osc_server, udp_client
 clients = [
     ("127.0.0.1", 9001), #RL-System
     ("127.0.0.1", 9002), #Media-Device
+    ("127.0.0.1", 9003), #OSC-Listener
+    ("127.0.0.1", 9004), #Visualizer
 ]
 
 
