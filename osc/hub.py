@@ -18,6 +18,6 @@ def broadcast_handler(address, *args):
 dispatcher = Dispatcher()
 dispatcher.set_default_handler(broadcast_handler)
 
-server = osc_server.ThreadingOSCUDPServer(("127.0.0.1", 8000), dispatcher)
-print("Server started at 127.0.0.1:8000")
+server = osc_server.ThreadingOSCUDPServer(("0.0.0.0", 8000), dispatcher)
+print("Server started at 0.0.0.0:8000")
 server.serve_forever()

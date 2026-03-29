@@ -57,7 +57,7 @@ In 4 Terminals:
 ```bash
 python osc/hub.py
 python osc/state_simulator.py
-python osc/reward_input.py
+python osc/input.py
 python train/train.py
 ```
 
