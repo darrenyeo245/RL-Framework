@@ -1,15 +1,3 @@
-"""
-3D Visualizer für das RL-ADM-OSC System
-Verwendet Vispy statt Open3D – läuft nativ auf Apple Silicon (arm64).
-
-Starten:
-    python osc/visualizer.py
-
-OSC-Quellen:
-    /adm/obj/101/xyz  → Actor (Kamera)
-    /adm/obj/1/xyz    → Scheinwerfer (Agent-Aktion)
-"""
-
 import argparse
 import threading
 import numpy as np
@@ -17,8 +5,6 @@ import numpy as np
 from vispy import app, scene
 from vispy.scene import visuals
 from pythonosc import dispatcher, osc_server
-
-# ─── Konfiguration ────────────────────────────────────────────────────────────
 
 OSC_IP   = "127.0.0.1"
 OSC_PORT = 9004
@@ -28,12 +14,10 @@ SPOTLIGHT_OSC_ADDR = "/adm/obj/1/xyz"
 
 SCALE = 1.0
 
-# Raumgrenzen
 X_MIN, X_MAX = -1.0, 1.0
 Y_MIN, Y_MAX = -1.0, 1.0
 Z_MIN, Z_MAX = 0.0, 1.0
 
-# Statischer Scheinwerfer in oberer Ecke
 STATIC_SPOTLIGHT_POS = np.array([1.0, 1.0, 1.0], dtype=np.float32)
 GROUND_Z = 0.0
 
@@ -74,18 +58,14 @@ def clamp_xyz(values):
         dtype=np.float32,
     )
 
-# ─── Gemeinsamer Zustand ──────────────────────────────────────────────────────
-
-class SharedState:
+class InitState:
     def __init__(self):
         self.lock          = threading.Lock()
         self.actor_pos     = np.array([0.0, 0.0, 0.0], dtype=np.float32)
         self.aim_pos       = np.array([0.0, 0.0, 0.0], dtype=np.float32)
         self.updated       = False
 
-state = SharedState()
-
-# ─── OSC Handler ──────────────────────────────────────────────────────────────
+state = InitState()
 
 def handle_actor(address, *args):
     if len(args) >= 3:
@@ -109,10 +89,7 @@ def start_osc_server():
     print(f"[OSC] Listening on {OSC_IP}:{OSC_PORT}")
     server.serve_forever()
 
-# ─── Visualizer ───────────────────────────────────────────────────────────────
-
 def build_scene():
-    """Baut das Vispy-Fenster und gibt alle relevanten Objekte zurück."""
     canvas = scene.SceneCanvas(
         title="3D Visualizer",
         size=(900, 700),
@@ -121,7 +98,6 @@ def build_scene():
     )
     view = canvas.central_widget.add_view()
 
-    # Schräge isometrische Kamera – alle 3 Achsen sichtbar
     view.camera = scene.cameras.TurntableCamera(
         elevation=30,
         azimuth=45,
@@ -130,10 +106,8 @@ def build_scene():
     )
     view.camera.set_range(x=(X_MIN, X_MAX), y=(Y_MIN, Y_MAX), z=(Z_MIN, Z_MAX))
 
-    # Koordinatenachsen
     visuals.XYZAxis(parent=view.scene)
 
-    # Gitternetz auf XY-Ebene als Orientierungshilfe
     grid_pos = []
     for i in np.linspace(-1, 1, 11):
         grid_pos += [[i, -1, 0], [i,  1, 0]]
@@ -146,7 +120,6 @@ def build_scene():
         parent=view.scene,
     )
 
-    # Actor – blauer Marker
     actor_marker = visuals.Markers(parent=view.scene)
     actor_marker.set_data(
         pos=np.array([[0.0, 0.0, 0.0]], dtype=np.float32),
@@ -157,7 +130,6 @@ def build_scene():
         symbol="disc",
     )
 
-    # Statischer Scheinwerfer – gelber Marker
     spot_marker = visuals.Markers(parent=view.scene)
     spot_marker.set_data(
         pos=STATIC_SPOTLIGHT_POS.reshape(1, 3),
@@ -168,7 +140,6 @@ def build_scene():
         symbol="star",
     )
 
-    # Punkt auf XY-Ebene, den der Scheinwerfer anstrahlt
     aim_marker = visuals.Markers(parent=view.scene)
     aim_marker.set_data(
         pos=np.array([[0.0, 0.0, 0.0]], dtype=np.float32),
@@ -179,7 +150,6 @@ def build_scene():
         symbol="disc",
     )
 
-    # Verbindungslinie statischer Scheinwerfer -> Raumgrenze
     _initial_end = extend_to_room_boundary(
         STATIC_SPOTLIGHT_POS, np.array([0.0, 0.0, 0.0], dtype=np.float32)
     )
@@ -190,7 +160,6 @@ def build_scene():
         parent=view.scene,
     )
 
-    # Legende (2D, direkt auf Canvas)
     visuals.Text(
         "Akteur",
         color=(0.2, 0.6, 1.0, 1.0),
@@ -219,7 +188,6 @@ def build_scene():
 def run_visualizer():
     canvas, actor_marker, spot_marker, aim_marker, beam_line = build_scene()
 
-    # Timer für OSC-Updates (~30 Hz)
     def on_timer(event):
         with state.lock:
             if not state.updated:
@@ -263,8 +231,6 @@ def run_visualizer():
     print("[VIS] Visualizer läuft. Fenster schließen zum Beenden.")
     app.run()
 
-# ─── Entry Point ──────────────────────────────────────────────────────────────
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="3D Visualizer für RL-ADM-OSC")
     parser.add_argument("--port",  type=int,   default=OSC_PORT,
@@ -276,9 +242,7 @@ if __name__ == "__main__":
     OSC_PORT = args.port
     SCALE    = args.scale
 
-    # OSC-Server in eigenem Thread
     osc_thread = threading.Thread(target=start_osc_server, daemon=True)
     osc_thread.start()
 
-    # Vispy läuft im Main-Thread
     run_visualizer()
