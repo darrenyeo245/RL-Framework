@@ -164,21 +164,21 @@ def build_scene():
         "Akteur",
         color=(0.2, 0.6, 1.0, 1.0),
         font_size=10,
-        pos=(10, 20),
+        pos=(30, 20),
         parent=canvas.scene,
     )
     visuals.Text(
         "Scheinwerfer",
         color=(1.0, 0.8, 0.1, 1.0),
         font_size=10,
-        pos=(10, 40),
+        pos=(60, 40),
         parent=canvas.scene,
     )
     visuals.Text(
         "Ausrichtung (XY-Ebene)",
         color=(1.0, 0.25, 0.25, 1.0),
         font_size=10,
-        pos=(10, 60),
+        pos=(100, 60),
         parent=canvas.scene,
     )
 
