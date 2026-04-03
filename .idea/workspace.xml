@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="03b0a8fa-4d6c-4a35-9e80-0ca9fa93a08f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/RL-Framework.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/RL-Framework.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/osc/hub.py" beforeDir="false" afterPath="$PROJECT_DIR$/osc/hub.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/osc/state_simulator.py" beforeDir="false" afterPath="$PROJECT_DIR$/osc/state_simulator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/logs/agent_osc.log" beforeDir="false" afterPath="$PROJECT_DIR$/train/logs/agent_osc.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/models/final_model.zip" beforeDir="false" afterPath="$PROJECT_DIR$/train/models/final_model.zip" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +86,7 @@
       <recent name="C:\Users\darre\Documents\Bachelorthesis\RL-Framework" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.hub">
+  <component name="RunManager">
     <configuration name="hub" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="RL-Framework" />
       <option name="ENV_FILES" value="" />
@@ -246,6 +243,7 @@
       <workItem from="1774954476512" duration="274000" />
       <workItem from="1774955461201" duration="615000" />
       <workItem from="1774956121667" duration="638000" />
+      <workItem from="1775138655172" duration="4255000" />
     </task>
     <servers />
   </component>
@@ -264,14 +262,14 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/RL_Framework$input.coverage" NAME="input Coverage Results" MODIFIED="1774955748039" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/RL_Framework$input.coverage" NAME="input Coverage Results" MODIFIED="1775220125911" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/osc" />
     <SUITE FILE_PATH="coverage/RL_Framework$open3d_visualizer.coverage" NAME="open3d_visualizer Coverage Results" MODIFIED="1774261782542" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/osc" />
     <SUITE FILE_PATH="coverage/RL_Framework$visualize_agent.coverage" NAME="visualize_agent Coverage Results" MODIFIED="1771084433581" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/visualization" />
-    <SUITE FILE_PATH="coverage/RL_Framework$state_simulator.coverage" NAME="state_simulator Coverage Results" MODIFIED="1774955754409" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/RL_Framework$train.coverage" NAME="train Coverage Results" MODIFIED="1774955722393" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/RL_Framework$visualizer.coverage" NAME="visualizer Coverage Results" MODIFIED="1774955750189" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/RL_Framework$state_simulator.coverage" NAME="state_simulator Coverage Results" MODIFIED="1775220123108" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/osc" />
+    <SUITE FILE_PATH="coverage/RL_Framework$train.coverage" NAME="train Coverage Results" MODIFIED="1775220135984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/train" />
+    <SUITE FILE_PATH="coverage/RL_Framework$visualizer.coverage" NAME="visualizer Coverage Results" MODIFIED="1775220139578" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RL_Framework$agent_signal_listener.coverage" NAME="agent_signal_listener Coverage Results" MODIFIED="1774343681977" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/osc" />
-    <SUITE FILE_PATH="coverage/RL_Framework$hub.coverage" NAME="hub Coverage Results" MODIFIED="1774955756355" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/RL_Framework$hub.coverage" NAME="hub Coverage Results" MODIFIED="1775220165566" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/osc" />
     <SUITE FILE_PATH="coverage/RL_Framework$media_env.coverage" NAME="media_env Coverage Results" MODIFIED="1771167697954" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/envs" />
     <SUITE FILE_PATH="coverage/RL_Framework$reward_input.coverage" NAME="reward_input Coverage Results" MODIFIED="1774696026538" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/RL_Framework$osc_interface.coverage" NAME="osc_interface Coverage Results" MODIFIED="1774260687800" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/osc" />
