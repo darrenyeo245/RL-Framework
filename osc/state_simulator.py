@@ -17,7 +17,6 @@ STEP_TRIGGER_ADDRS = [
     "/training/stop",
 ]
 
-
 def clamp_state(values):
     s = np.array(values[:3], dtype=np.float32)
     s[0] = np.clip(s[0], -1.0, 1.0)

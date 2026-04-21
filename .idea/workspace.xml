@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="03b0a8fa-4d6c-4a35-9e80-0ca9fa93a08f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/env/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/final_model.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/train/train/logs/agent_osc.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/RL-Framework.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/RL-Framework.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/osc/hub.py" beforeDir="false" afterPath="$PROJECT_DIR$/osc/hub.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/osc/state_simulator.py" beforeDir="false" afterPath="$PROJECT_DIR$/osc/state_simulator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/logs/agent_osc.log" beforeDir="false" afterPath="$PROJECT_DIR$/train/logs/agent_osc.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/models/final_model.zip" beforeDir="false" afterPath="$PROJECT_DIR$/train/models/final_model.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualizer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,33 +56,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.agent_signal_listener.executor&quot;: &quot;Run&quot;,
-    &quot;Python.hub.executor&quot;: &quot;Run&quot;,
-    &quot;Python.media_env.executor&quot;: &quot;Run&quot;,
-    &quot;Python.open3d_visualizer.executor&quot;: &quot;Run&quot;,
-    &quot;Python.osc_interface.executor&quot;: &quot;Run&quot;,
-    &quot;Python.reward_input.executor&quot;: &quot;Run&quot;,
-    &quot;Python.state_simulator.executor&quot;: &quot;Run&quot;,
-    &quot;Python.train.executor&quot;: &quot;Run&quot;,
-    &quot;Python.visualize_agent.executor&quot;: &quot;Run&quot;,
-    &quot;Python.visualizer.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/darre/Documents/Bachelorthesis/RL-Framework/osc&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;Runtime.Targets.Configurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.agent_signal_listener.executor": "Run",
+    "Python.hub.executor": "Run",
+    "Python.media_env.executor": "Run",
+    "Python.open3d_visualizer.executor": "Run",
+    "Python.osc_interface.executor": "Run",
+    "Python.reward_input.executor": "Run",
+    "Python.state_simulator.executor": "Run",
+    "Python.train.executor": "Run",
+    "Python.visualize_agent.executor": "Run",
+    "Python.visualizer.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ai.playground.ignore.import.keys.banner.in.settings": "true",
+    "git-widget-placeholder": "Merging main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/darre/Documents/Bachelorthesis/RL-Framework/osc",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "Runtime.Targets.Configurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\darre\Documents\Bachelorthesis\RL-Framework\osc" />
