@@ -4,9 +4,17 @@ import threading
 import numpy as np
 import logging
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+BROADCAST_IP = os.getenv("BROADCAST_IP", "255.255.255.255")
+BROADCAST_PORT = int(os.getenv("BROADCAST_PORT", 9001))
+RASPI_PORT = int(os.getenv("RASPI_PORT", 9001))
 
 class OSCInterface:
-    def __init__(self, enable_logging=True, log_path="train/logs/agent_osc.log"):
+    def __init__(self, enable_logging=True, log_path="logs/agent_osc.log"):
         self.actor_state = np.zeros(3, dtype=np.float32)
         self.media_command_state = np.zeros(3, dtype=np.float32)
         self.reward = 0.0
@@ -18,23 +26,25 @@ class OSCInterface:
         self._training_stop_pending = False
         self._lock = threading.Condition()
 
-        self.client = udp_client.SimpleUDPClient("127.0.0.1", 8000)
+        self.client = udp_client.SimpleUDPClient(BROADCAST_IP, BROADCAST_PORT, allow_broadcast=True)
+        self.local_client = udp_client.SimpleUDPClient("127.0.0.1", RASPI_PORT)
         self.logger = self._setup_logger(enable_logging=enable_logging, log_path=log_path)
 
         dispatcher = Dispatcher()
         dispatcher.map("/adm/obj/101/xyz", self.state_handler)
-        dispatcher.map("/adm/obj/1/xyz", self.media_command_handler)
         dispatcher.map("/reward", self.reward_handler)
         dispatcher.map("/episode/reset_manual", self.manual_reset_handler)
         dispatcher.map("/episode/end", self.episode_end_handler)
         dispatcher.map("/training/stop", self.training_stop_handler)
+        dispatcher.map("/training/stop_save", self.training_stop_handler)
 
 
-        self.server = osc_server.ThreadingOSCUDPServer(("127.0.0.1", 9001), dispatcher)
+        self.server = osc_server.ThreadingOSCUDPServer(("0.0.0.0", RASPI_PORT), dispatcher)
         threading.Thread(target=self.server.serve_forever, daemon=True).start()
-        self._log_event("listener_started", "/", ["127.0.0.1:9001"])
+        self._log_event("listener_started", "/", ["0.0.0.0, 9001"])
 
-    def _setup_logger(self, enable_logging, log_path):
+    @staticmethod
+    def _setup_logger(enable_logging, log_path):
         logger = logging.getLogger("agent_osc")
         logger.propagate = False
 
@@ -71,13 +81,6 @@ class OSCInterface:
             with self._lock:
                 self.actor_state = np.array(args[:3], dtype=np.float32)
                 self._state_pending = True
-                self._lock.notify_all()
-            self._log_event("recv", address, args[:3])
-
-    def media_command_handler(self, address, *args):
-        if len(args) >= 3:
-            with self._lock:
-                self.media_command_state = np.array(args[:3], dtype=np.float32)
                 self._lock.notify_all()
             self._log_event("recv", address, args[:3])
 
@@ -139,9 +142,11 @@ class OSCInterface:
         action = np.asarray(action, dtype=np.float32)
         payload = action.tolist()
         self.client.send_message("/adm/obj/1/xyz", payload)
+        self.client.send_message("/adm/obj/2/xyz", payload)
         with self._lock:
             self.media_command_state = action.copy()
         self._log_event("send", "/adm/obj/1/xyz", payload)
+        self._log_event("send", "/adm/obj/2/xyz", payload)
 
     def send_reset(self, init_state):
         init_state = np.asarray(init_state, dtype=np.float32)
@@ -171,3 +176,8 @@ class OSCInterface:
             self._training_stop_pending = False
 
             return reward, manual_reset, episode_end, training_stop
+
+    def send_training_status(self, active: bool, text: str = "default"):
+        payload = [int(active), text]
+        self.client.send_message("/training/status", payload)
+        self._log_event("send", "/training/status", payload)
