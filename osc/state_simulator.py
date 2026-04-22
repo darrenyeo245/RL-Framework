@@ -4,9 +4,9 @@ from pythonosc import osc_server, udp_client
 from pythonosc.dispatcher import Dispatcher
 
 IN_IP = "0.0.0.0"
-IN_PORT = 9001
-BROADCAST_IP = "255.255.255.255"
-BROADCAST_PORT = 9001
+IN_PORT = 9002
+BROADCAST_IP = "127.0.0.1"
+BROADCAST_PORT = 8000
 
 STATE_OUT_ADDR = "/adm/obj/101/xyz"
 RESET_IN_ADDR = "/episode/reset"
@@ -27,7 +27,7 @@ def clamp_state(values):
 
 state = clamp_state([0.0, 0.0, 0.0])
 lock = threading.Lock()
-client = udp_client.SimpleUDPClient(BROADCAST_IP, BROADCAST_PORT, allow_broadcast=True)
+client = udp_client.SimpleUDPClient(BROADCAST_IP, BROADCAST_PORT, allow_broadcast=False)
 
 RNG = np.random.default_rng()
 
@@ -38,7 +38,9 @@ Z_BIAS = 0.01
 
 def publish_state():
     with lock:
-        client.send_message(STATE_OUT_ADDR, state.tolist())
+        payload = state.tolist()
+    client.send_message(STATE_OUT_ADDR, payload)
+    print(f"[sim->osc] {STATE_OUT_ADDR} {payload} -> {BROADCAST_IP}:{BROADCAST_PORT}", flush=True)
 
 
 def reset_handler(address, *args):
