@@ -11,7 +11,7 @@ BROADCAST_PORT = 8000
 STATE_OUT_ADDR = "/adm/obj/101/xyz"
 RESET_IN_ADDR = "/episode/reset"
 STEP_TRIGGER_ADDRS = [
-    "/reward",
+    "/adm/obj/1/xyz",
     "/episode/end",
     "/episode/reset_manual",
     "/training/stop",
@@ -54,6 +54,7 @@ def reset_handler(address, *args):
 
 
 def step_handler(address, *args):
+    # Step once per RL action; /adm/obj/2/xyz is intentionally ignored to avoid double steps.
     del address, args
     with lock:
         noise = RNG.normal(0.0, STEP_SCALE, size=3)
